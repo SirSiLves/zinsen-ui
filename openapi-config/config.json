@@ -1,0 +1,5 @@
+{
+  "input": "openapi-config/schema.json",
+  "output": "src/openapi",
+  "indexFile": true
+}

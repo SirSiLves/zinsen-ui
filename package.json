@@ -3,10 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "prestart": "npm run generate:openapi",
     "start": "ng serve",
+    "prebuild": "npm run generate:openapi && ts-appversion",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "pretest": "npm run generate:openapi",
+    "test": "ng test",
+    "generate:openapi": "ng-openapi-gen -c openapi-config/config.json"
   },
   "private": true,
   "dependencies": {
@@ -37,6 +41,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "typescript": "~4.2.3"
+    "typescript": "~4.2.3",
+    "ng-openapi-gen": "^0.17.0"
   }
 }
