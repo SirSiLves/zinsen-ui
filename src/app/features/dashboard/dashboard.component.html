@@ -1,3 +1,24 @@
-<p>dashboard works!</p>
 
-{{zinsen$ | async | json}}
+<div class="content" *ngIf="zinsen$ | async as zinsen">
+  <h1>Zinssätze</h1>
+
+  <div class="table">
+    <p-table [value]="zinsen" [resizableColumns]="true" [responsiveLayout]="'scroll'">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="produkt">Produkt <p-sortIcon field="produkt"></p-sortIcon></th>
+          <th pSortableColumn="laufzeit">Laufzeit <p-sortIcon field="laufzeit"></p-sortIcon></th>
+          <th pSortableColumn="zins">Zins <p-sortIcon field="zins"></p-sortIcon></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>{{product.produkt}}</td>
+          <td>{{product.laufzeit}}</td>
+          <td>{{product.zins}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+</div>

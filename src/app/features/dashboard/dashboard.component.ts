@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ZinsQuery } from '../../../openapi';
 import { Observable } from 'rxjs';
 import { ZinsenService } from '../../services/zinsen.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,14 +11,14 @@ import { ZinsenService } from '../../services/zinsen.service';
 })
 export class DashboardComponent implements OnInit {
 
-  zinsen$?: Observable<ZinsQuery[]>;
+  zinsen$!: Observable<ZinsQuery[]>;
 
   constructor(
     private zinsenService: ZinsenService
   ) { }
 
   ngOnInit(): void {
-    this.zinsen$ = this.zinsenService.getZinsen();
+    this.zinsen$ = this.zinsenService.getZinsen().pipe();
   }
 
 }
