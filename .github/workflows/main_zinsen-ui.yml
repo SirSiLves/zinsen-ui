@@ -52,4 +52,4 @@ jobs:
           app-name: 'Zinsen-Ui'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_ACD20CFEEA1C42EF9681C422D2D7FE6B }}
-          package: ./dist/zinsen-ui-app
+          package: .
