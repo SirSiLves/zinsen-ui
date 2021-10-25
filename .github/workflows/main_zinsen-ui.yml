@@ -29,7 +29,7 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: zinsen-ui-app
+          name: zinsen-ui
           path: .
 
   deploy:
@@ -43,7 +43,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: zinsen-ui-app
+          name: zinsen-ui
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -52,4 +52,4 @@ jobs:
           app-name: 'Zinsen-Ui'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_ACD20CFEEA1C42EF9681C422D2D7FE6B }}
-          package: ./dist/zinsen-ui-app
+          package: ./dist/zinsen-ui
