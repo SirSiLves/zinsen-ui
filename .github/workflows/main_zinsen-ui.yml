@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: zinsen-ui-app
-          path: .dist/zinsen-ui-app
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
