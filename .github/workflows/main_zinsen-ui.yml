@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - zinsen-ui
+name: Build and deploy Node.js app to Azure Web App - Zinsen-UI App
 
 on:
   push:
@@ -24,13 +24,14 @@ jobs:
       - name: npm install, build, and test
         run: |
           npm install
-          npm run build --prod --if-present
+          npm run build --if-present
+        working-directory: .
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: zinsen-ui-app
-          path: .
+          path: ./dist/zinsen-ui-app
 
   deploy:
     runs-on: ubuntu-latest
@@ -49,7 +50,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'Zinsen-Ui'
+          app-name: 'Zinsen-UI'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_ACD20CFEEA1C42EF9681C422D2D7FE6B }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_976F48C2BFFF43449E7032EE3651172C }}
           package: .
