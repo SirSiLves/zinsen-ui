@@ -44,6 +44,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: zinsen-ui
+          expire-in: 0 # Setting this to 0 will delete all artifacts
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
