@@ -26,5 +26,16 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
+  },
+  "paths": {
+    "@environment": [
+      "src/environments/environment"
+    ],
+    "@openapi": [
+      "src/openapi/index"
+    ],
+    "@versions": [
+      "src/_versions"
+    ]
   }
 }

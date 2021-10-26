@@ -8,6 +8,9 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { ButtonModule } from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
 import { TableModule } from 'primeng/table';
+import { ApiModule } from '../openapi';
+import { environment } from '../environments/environment';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,8 @@ import { TableModule } from 'primeng/table';
     FooterComponent
   ],
   imports: [
+    CommonModule,
+    ApiModule.forRoot({rootUrl: environment.backendUrl}),
     BrowserModule,
     ButtonModule,
     HttpClientModule,
