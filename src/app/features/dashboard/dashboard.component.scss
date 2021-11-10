@@ -2,6 +2,13 @@
   width: 100%;
 }
 
+.progress {
+  position: absolute;
+  left: -1px;
+  top: 106px;
+  width: 110%;
+}
+
 .content {
   margin: 3rem 5rem 0 5rem;
   max-width: 80rem;

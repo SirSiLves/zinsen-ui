@@ -11,6 +11,11 @@ import { TableModule } from 'primeng/table';
 import { ApiModule } from '../openapi';
 import { environment } from '../environments/environment';
 import { CommonModule } from '@angular/common';
+import { ToastModule } from 'primeng/toast';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RippleModule } from 'primeng/ripple';
+import { MessageService } from 'primeng/api';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @NgModule({
   declarations: [
@@ -25,9 +30,14 @@ import { CommonModule } from '@angular/common';
     BrowserModule,
     ButtonModule,
     HttpClientModule,
-    TableModule
+    TableModule,
+    ToastModule,
+    BrowserAnimationsModule,
+    ProgressBarModule,
   ],
-  providers: [],
+  providers: [
+    MessageService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

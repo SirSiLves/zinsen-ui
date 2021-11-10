@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ZinsQuery } from '../../../openapi';
 import { Observable } from 'rxjs';
 import { ZinsenService } from '../../services/zinsen.service';
-import { map } from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.zinsen$ = this.zinsenService.getZinsen().pipe();
+    this.zinsen$ = this.zinsenService.getZinsen().pipe(shareReplay());
   }
 
 }
