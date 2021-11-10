@@ -1,7 +1,13 @@
 <ng-container *ngIf="zinsen$ | async; then isLoaded; else isLoading"></ng-container>
 <ng-template #isLoading>
-  <div class="progress">
+  <div class="progress" *ngIf="!error; else errorView">
     <p-progressBar mode="indeterminate" [style]="{'height': '0.5rem', 'background': 'red'}"></p-progressBar>
+  </div>
+</ng-template>
+<ng-template #errorView>
+  <div class="error">
+    <i class="pi pi-exclamation-triangle" style="font-size: 8rem"></i>
+    <h1>Aktuell können keine Zinsen angezeigt werden..</h1>
   </div>
 </ng-template>
 
