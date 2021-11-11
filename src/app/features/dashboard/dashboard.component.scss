@@ -4,9 +4,10 @@
 
 .progress {
   position: absolute;
-  left: -1px;
+  overflow: hidden;
+  left: 0;
   top: 106px;
-  width: 110%;
+  width: 100%;
 }
 
 .error {
