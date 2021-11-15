@@ -39,7 +39,7 @@
                   class="ml-2"
                   type="button"
                   label="Berechne & Lese Simulation"
-                  [disabled]="loops.invalid"
+                  [disabled]="loops.invalid || isLoading"
                   (click)="startSimulation()"></button>
           <div class="count">{{count}} / {{total}}</div>
         </div>
@@ -80,6 +80,7 @@
                     type="button"
                     icon="pi pi-save"
                     (click)="create()"
+                    [disabled]="laufzeit.invalid || produkt.invalid"
                     class="mb-2"></button>
           </div>
 
