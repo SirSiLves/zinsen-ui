@@ -1,20 +1,95 @@
-<ng-container *ngIf="zinsen$ | async; then isLoaded; else isLoading"></ng-container>
-<ng-template #isLoading>
-  <div class="progress" *ngIf="!error; else errorView">
+<div *ngIf="isLoading">
+  <div class="progress">
     <p-progressBar mode="indeterminate" [style]="{'height': '0.5rem', 'background': 'red'}"></p-progressBar>
   </div>
-</ng-template>
-<ng-template #errorView>
+</div>
+
+<div *ngIf="error">
   <div class="error">
     <i class="pi pi-exclamation-triangle" style="font-size: 8rem"></i>
-    <h1>Aktuell können keine Zinsen angezeigt werden..</h1>
+    <h1>Fehler beim Laden der Zinsen..</h1>
   </div>
-</ng-template>
+</div>
 
-<ng-template #isLoaded>
-  <div class="content" *ngIf="zinsen$ | async as zinsen">
-    <h1>Zinssätze</h1>
 
+<div *ngIf="zinsen">
+  <h1>Zinssätze</h1>
+
+  <p-accordion [multiple]="true">
+    <p-accordionTab header="Simulation">
+      <div>
+        <label for="loop">Anzahl Durchläufe</label>
+        <div class="simulation pb-4">
+          <p-inputNumber id="loop"
+                         [showButtons]="true"
+                         buttonLayout="horizontal"
+                         inputId="loop"
+                         [step]="1"
+                         [min]="1"
+                         [max]="1000"
+                         class="mt-1 input"
+                         [formControl]="loops"
+                         decrementButtonClass="p-button-danger"
+                         incrementButtonClass="p-button-success"
+                         incrementButtonIcon="pi pi-plus"
+                         decrementButtonIcon="pi pi-minus" mode="decimal">
+          </p-inputNumber>
+          <button pButton
+                  pRipple
+                  class="ml-2"
+                  type="button"
+                  label="Berechne & Lese Simulation"
+                  [disabled]="loops.invalid"
+                  (click)="startSimulation()"></button>
+          <div class="count">{{count}} / {{total}}</div>
+        </div>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab header="Erstelle">
+      <div class="mt-3">
+        <div class="p-fluid p-formgrid grid">
+          <div class="p-field col-3">
+        <span class="p-float-label">
+          <p-dropdown [options]="laufzeiten"
+                      [autoDisplayFirst]="false"
+                      optionLabel="name"
+                      inputId="laufzeit"
+                      id="laufzeit"
+                      [formControl]="laufzeit"
+                      [showClear]="true"></p-dropdown>
+          <label for="laufzeit">Laufzeit</label>
+        </span>
+          </div>
+
+          <div class="p-field col-3">
+        <span class="p-float-label">
+          <p-dropdown [options]="products"
+                      [autoDisplayFirst]="false"
+                      optionLabel="name"
+                      inputId="products"
+                      id="products"
+                      [formControl]="produkt"
+                      [showClear]="true"></p-dropdown>
+          <label for="products">Produkt</label>
+        </span>
+          </div>
+
+          <div class="p-field col-3">
+            <button pButton
+                    pRipple
+                    type="button"
+                    icon="pi pi-save"
+                    (click)="create()"
+                    class="mb-2"></button>
+          </div>
+
+        </div>
+
+
+      </div>
+    </p-accordionTab>
+  </p-accordion>
+  <div class="content mt-5">
     <div class="table">
       <p-table [value]="zinsen" [resizableColumns]="true" [responsiveLayout]="'scroll'">
         <ng-template pTemplate="header">
@@ -28,19 +103,45 @@
             <th pSortableColumn="zins">Zins
               <p-sortIcon field="zins"></p-sortIcon>
             </th>
+            <th pSortableColumn="last-update">Zuletzt Berechnet
+              <p-sortIcon field="last-update"></p-sortIcon>
+            </th>
+            <th pSortableColumn="update-delete">Aktion
+              <p-sortIcon field="update-delete"></p-sortIcon>
+            </th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-product>
           <tr>
             <td>{{product.produkt}}</td>
-            <td>{{product.laufzeit}}</td>
+            <td>
+              <span *ngIf="product.laufzeit === 0; else default">Unbefristet</span>
+              <ng-template #default>{{product.laufzeit}}</ng-template>
+            </td>
             <td>{{product.zins}}</td>
+            <td>{{product.zuletztBerechnet | date: 'HH:mm:ss dd.MM.yyyy' }}</td>
+            <td>
+              <button pButton
+                      pRipple
+                      type="button"
+                      icon="pi pi-refresh"
+                      (click)="update(product)"></button>
+              <button pButton
+                      pRipple
+                      type="button"
+                      icon="pi pi-trash"
+                      (click)="delete(product)"
+                      class="p-button-danger ml-1"></button>
+            </td>
           </tr>
         </ng-template>
       </p-table>
     </div>
   </div>
-</ng-template>
+</div>
+
+
+
 
 
 

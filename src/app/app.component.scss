@@ -5,8 +5,11 @@ body {
 }
 
 .container {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  grid-template-columns: 1fr;
+  align-self: center;
   min-height: 100%;
-  position: relative;
   background-color: white;
 }
 

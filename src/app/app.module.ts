@@ -16,6 +16,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RippleModule } from 'primeng/ripple';
 import { MessageService } from 'primeng/api';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DropdownModule } from 'primeng/dropdown';
+import { AccordionModule } from 'primeng/accordion';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +39,11 @@ import { ProgressBarModule } from 'primeng/progressbar';
     ToastModule,
     BrowserAnimationsModule,
     ProgressBarModule,
+    RippleModule,
+    InputNumberModule,
+    ReactiveFormsModule,
+    DropdownModule,
+    AccordionModule,
   ],
   providers: [
     MessageService,

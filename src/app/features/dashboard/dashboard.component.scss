@@ -1,5 +1,6 @@
 :host {
   width: 100%;
+  margin: 0 5rem 5rem 5rem;
 }
 
 .progress {
@@ -19,11 +20,31 @@
   width: 100%;
 }
 
+.simulation {
+  display: flex;
+
+  button {
+    margin-top: 0.2rem;
+    max-height: 2.4rem;
+  }
+
+  .count {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+  }
+}
+
 .content {
-  margin: 3rem 5rem 0 5rem;
-  max-width: 80rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
 
   .table {
+    width: 100%;
+    height: 100%;
   }
 
 }
