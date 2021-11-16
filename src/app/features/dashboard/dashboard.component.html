@@ -12,21 +12,22 @@
 </div>
 
 
-<div *ngIf="zinsen">
+<div *ngIf="zinsen && !error">
   <h1>Zinssätze</h1>
 
   <p-accordion [multiple]="true">
     <p-accordionTab header="Simulation">
       <div>
-        <label for="loop">Anzahl Durchläufe</label>
+        <label for="loop">Anzahl Threads</label>
         <div class="simulation pb-4">
           <p-inputNumber id="loop"
+                         (onFocus)="successCount = 0"
                          [showButtons]="true"
                          buttonLayout="horizontal"
                          inputId="loop"
                          [step]="1"
                          [min]="1"
-                         [max]="1000"
+                         [max]="5000"
                          class="mt-1 input"
                          [formControl]="loops"
                          decrementButtonClass="p-button-danger"
@@ -38,10 +39,10 @@
                   pRipple
                   class="ml-2"
                   type="button"
-                  label="Berechne & Lese Simulation"
+                  label="Start"
                   [disabled]="loops.invalid || isLoading"
                   (click)="startSimulation()"></button>
-          <div class="count">{{count}} / {{total}}</div>
+          <h4 class="ml-2">Erfolgreiche Requests: {{successCount}} / {{loops.value}}</h4>
         </div>
       </div>
     </p-accordionTab>

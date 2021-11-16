@@ -20,14 +20,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   isLoading = false;
   isCreate = true;
 
+  successCount = 0;
+
   form = this.formBuilder.group({
     loops: ['', [Validators.required]],
     laufzeit: ['', [Validators.required]],
     produkt: ['', [Validators.required]],
   });
-
-  count = 0;
-  total = 1;
 
   laufzeiten = [
     {name: 'Unbefristet', code: '0'},
@@ -55,7 +54,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loadZinsen(true);
+    this.loops.patchValue(0);
+    this.isLoading = true;
+    this.loadZinsen();
   }
 
   ngOnDestroy() {
@@ -63,17 +64,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.onDestroy$.complete();
   }
 
-  loadZinsen(withLoading: boolean): void {
-    this.isLoading = withLoading;
+  loadZinsen(): void {
+    this.isLoading = true;
     this.zinsenService.getZinsen()
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(zinsen => {
         this.zinsen = zinsen;
-        this.count++;
-
-        if (withLoading) {
-          this.isLoading = false;
-        }
+        this.isLoading = false;
       }, error => {
         this.error = error;
         this.isLoading = false;
@@ -82,20 +79,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   startSimulation(): void {
-    this.count = 0;
-    this.total = this.loops.value;
-
-    this.calculate(0);
-
-    let i = 0
-    while (i < this.loops.value) {
-      i++;
-      if (i === this.loops.value) {
-        this.loadZinsen(true);
-      } else {
-        this.loadZinsen(false);
-      }
-    }
+    this.isLoading = true;
+    this.successCount = 0;
+    this.zinsenService.simulate(this.loops.value)
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(successCount => {
+        this.successCount = successCount;
+        this.isLoading = false;
+      }, error => {
+        this.error = error;
+        this.isLoading = false;
+        throw error;
+      })
   }
 
   calculate(i: number): void {
@@ -105,6 +100,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         i++;
         if (i < this.zinsen.length) {
           this.calculate(i);
+        } else {
+          this.loadZinsen();
         }
       }, error => {
         this.error = error;
@@ -115,14 +112,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   create(): void {
     this.isLoading = true;
-    this.count = 0;
-
     this.zinsenService.create(this.laufzeit.value.code, this.produkt.value.code)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(() => {
         this.laufzeit.reset();
         this.produkt.reset();
-        this.loadZinsen(true);
+        this.loadZinsen();
       }, error => {
         this.error = error;
         this.isLoading = false;
@@ -132,12 +127,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   update(zins: ZinsQuery): void {
     this.isLoading = true;
-    this.count = 0;
-
     this.zinsenService.calculateZins(zins)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(() => {
-        this.loadZinsen(true);
+        this.loadZinsen();
       }, error => {
         this.error = error;
         this.isLoading = false;
@@ -147,12 +140,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   delete(zins: ZinsQuery): void {
     this.isLoading = true;
-    this.count = 0;
-
     this.zinsenService.delete(zins)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(() => {
-        this.loadZinsen(true);
+        this.loadZinsen();
       }, error => {
         this.error = error;
         this.isLoading = false;

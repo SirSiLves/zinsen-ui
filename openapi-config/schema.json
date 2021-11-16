@@ -345,6 +345,53 @@
         }
       }
     },
+    "/api/zinsen/simulation/{durchlaeufe}": {
+      "post": {
+        "tags": [
+          "zinsen-resource"
+        ],
+        "summary": "starteSimulation",
+        "operationId": "starteSimulationUsingPOST",
+        "parameters": [
+          {
+            "name": "durchlaeufe",
+            "in": "path",
+            "description": "durchlaeufe",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/api/zinsen/{id}": {
       "put": {
         "tags": [

@@ -91,4 +91,20 @@ export class ZinsenService {
     );
 
   }
+
+  simulate(loops: number): Observable<number> {
+    return this.zinsenResourceService.starteSimulationUsingPost({
+      durchlaeufe: loops
+    }).pipe(
+      catchError(error => {
+        this.messageService.add({
+          severity: 'error',
+          summary: error.name,
+          detail: error.message
+        });
+
+        return throwError(error);
+      })
+    );
+  }
 }
