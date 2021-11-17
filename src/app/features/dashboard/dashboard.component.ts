@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   isCreate = true;
 
   successCount = 0;
+  loadingProducts: ZinsQuery[] = [];
 
   form = this.formBuilder.group({
     loops: ['', [Validators.required]],
@@ -127,9 +128,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   update(zins: ZinsQuery): void {
     this.isLoading = true;
+    this.loadingProducts.push(zins);
+
     this.zinsenService.calculateZins(zins)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(() => {
+        this.loadingProducts = this.loadingProducts.filter(p => p !== zins);
         this.loadZinsen();
       }, error => {
         this.error = error;

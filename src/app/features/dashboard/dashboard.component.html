@@ -117,8 +117,8 @@
           <tr>
             <td>{{product.produkt}}</td>
             <td>
-              <span *ngIf="product.laufzeit === 0; else default">Unbefristet</span>
-              <ng-template #default>{{product.laufzeit}}</ng-template>
+              <span *ngIf="product.laufzeit === 0; else unlimited">Unbefristet</span>
+              <ng-template #unlimited>{{product.laufzeit}}</ng-template>
             </td>
             <td>{{product.zins}}</td>
             <td>{{product.zuletztBerechnet | date: 'HH:mm:ss dd.MM.yyyy' }}</td>
@@ -127,6 +127,7 @@
                       pRipple
                       type="button"
                       icon="pi pi-refresh"
+                      [disabled]="loadingProducts.includes(product) "
                       (click)="update(product)"></button>
               <button pButton
                       pRipple
