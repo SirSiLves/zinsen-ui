@@ -9,6 +9,7 @@
     .zinsen {
       display: flex;
       justify-content: center;
+      white-space:nowrap;
       color: #438dff;
     }
 
@@ -18,6 +19,7 @@
       justify-content: flex-end;
       color: #d55757;
       text-align: end;
+      white-space:nowrap;
     }
   }
 }
