@@ -18,7 +18,9 @@ export class MonitoringService {
         enableAutoRouteTracking: true,
         enableAjaxErrorStatusText: true,
         disableFetchTracking: false,
-        enableCorsCorrelation: true
+        enableCorsCorrelation: true,
+        enableRequestHeaderTracking: true,
+        enableResponseHeaderTracking: true,
       }
     });
 
