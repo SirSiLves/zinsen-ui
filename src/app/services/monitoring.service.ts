@@ -13,10 +13,12 @@ export class MonitoringService {
     this.appInsights = new ApplicationInsights({
       config: {
         instrumentationKey: environment.appInsights.instrumentationKey,
-        enableAutoRouteTracking: true, // option to log all route changes,
         distributedTracingMode: DistributedTracingModes.AI_AND_W3C,
-        enableCorsCorrelation: true,
-        enableRequestHeaderTracking: true,
+        autoTrackPageVisitTime: true,
+        enableAutoRouteTracking: true,
+        enableAjaxErrorStatusText: true,
+        disableFetchTracking: false,
+        enableCorsCorrelation: true
       }
     });
 
