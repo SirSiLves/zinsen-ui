@@ -14,9 +14,9 @@ export class MonitoringService {
       config: {
         instrumentationKey: environment.appInsights.instrumentationKey,
         enableAutoRouteTracking: true, // option to log all route changes,
-        distributedTracingMode: DistributedTracingModes.W3C,
-        disableCorrelationHeaders: false,
-        enableCorsCorrelation: true
+        distributedTracingMode: DistributedTracingModes.AI_AND_W3C,
+        enableCorsCorrelation: true,
+        enableRequestHeaderTracking: true,
       }
     });
 
