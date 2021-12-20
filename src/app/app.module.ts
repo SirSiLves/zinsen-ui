@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { AccordionModule } from 'primeng/accordion';
+import { ErrorHandlerService } from './services/error-handler.service';
 
 
 @NgModule({
@@ -47,7 +48,9 @@ import { AccordionModule } from 'primeng/accordion';
   ],
   providers: [
     MessageService,
+    {provide: ErrorHandler, useClass: ErrorHandlerService}
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
