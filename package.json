@@ -23,6 +23,7 @@
     "@angular/platform-browser": "~12.0.3",
     "@angular/platform-browser-dynamic": "~12.0.3",
     "@angular/router": "~12.0.3",
+    "@microsoft/applicationinsights-web": "^2.6.5",
     "@saithodev/ts-appversion": "^2.2.0",
     "primeflex": "^3.0.1",
     "primeicons": "^4.1.0",
