@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  backendUrl: 'https://zinsen-api.azurewebsites.net',
+  backendUrl: 'http://localhost:8080',
   appInsights: {
-    roleName: 'blabla zinsen-ui',
-    instrumentationKey: '37402c98-17e2-4f2c-a6ac-0355e698ff34'
+    roleName: 'zinsen-ui',
+    instrumentationKey: 'cb35b768-2ece-4f63-baf7-a06c6d326b1d'
   }
 };
 
