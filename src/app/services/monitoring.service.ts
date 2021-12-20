@@ -13,7 +13,7 @@ export class MonitoringService {
     this.appInsights = new ApplicationInsights({
       config: {
         instrumentationKey: environment.appInsights.instrumentationKey,
-        distributedTracingMode: DistributedTracingModes.AI_AND_W3C,
+        distributedTracingMode: DistributedTracingModes.AI,
         autoTrackPageVisitTime: true,
         enableAutoRouteTracking: true,
         enableAjaxErrorStatusText: true,
