@@ -43,7 +43,7 @@ import { AccordionModule } from 'primeng/accordion';
     InputNumberModule,
     ReactiveFormsModule,
     DropdownModule,
-    AccordionModule,
+    AccordionModule
   ],
   providers: [
     MessageService,

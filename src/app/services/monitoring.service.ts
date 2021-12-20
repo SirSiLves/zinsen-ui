@@ -24,7 +24,7 @@ export class MonitoringService {
 
     this.appInsights.addTelemetryInitializer(envelope => {
       if (envelope && envelope.tags) {
-        envelope.tags["ai.cloud.role"] = "app";
+        envelope.tags["ai.cloud.role"] = "zinsen-ui";
       }
     });
   }

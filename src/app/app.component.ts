@@ -15,7 +15,7 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.monitoringService.logPageView();
+    this.monitoringService.logPageView('Zinsen-UI loaded',);
   }
 
 }
