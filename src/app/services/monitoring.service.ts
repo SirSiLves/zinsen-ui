@@ -13,10 +13,7 @@ export class MonitoringService {
     this.appInsights = new ApplicationInsights({
       config: {
         instrumentationKey: environment.appInsights.instrumentationKey,
-        enableRequestHeaderTracking: true,
-        enableResponseHeaderTracking: true,
         enableCorsCorrelation: true,
-        enableAutoRouteTracking: true
       }
     });
 
