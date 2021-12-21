@@ -15,6 +15,8 @@ export class MonitoringService {
         instrumentationKey: environment.appInsights.instrumentationKey,
         enableRequestHeaderTracking: true,
         enableResponseHeaderTracking: true,
+        enableCorsCorrelation: true,
+        enableAutoRouteTracking: true
       }
     });
 
